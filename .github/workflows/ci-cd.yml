@@ -35,7 +35,7 @@ jobs:
       env:
         SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/live_learning_platform?useSSL=false&serverTimezone=UTC
         SPRING_DATASOURCE_USERNAME: root
-        SPRING_DATASOURCE_PASSWORD: root_password_placeholder
+        SPRING_DATASOURCE_PASSWORD: 06@La1234
 
     - name: Verify Docker Image Build
       run: docker build -t live-learning-backend:latest .
