@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: live_learning_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "06@La1234"
+      MYSQL_DATABASE: live_learning_platform
+    ports:
+      - "3302:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: live_learning_backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/live_learning_platform?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&allowLoadLocalInfile=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=06@La1234
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+
+volumes:
+  mysql_data:	
